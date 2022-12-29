@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { DateTime } from "luxon/src/luxon";
 import { ref, computed } from "vue";
-import { type TimelinePost, today, thisMonth, thisWeek } from "../posts";
+import type { TimelinePost } from "@/posts";
 import TimeLineItem from "@/components/TimeLineItem.vue";
 import { usePosts } from "@/stores/posts";
 
@@ -12,8 +12,12 @@ type Period = typeof periods[number];
 const selectedPeriod = ref<Period>("Today");
 
 const posts = computed<TimelinePost[]>(() => {
-  return [today, thisWeek, thisMonth]
-    .map((post) => {
+  return postsStore.ids
+    .map((id) => {
+      const post = postsStore.all.get(id);
+      if (!post) {
+        throw new Error(`Post ${id} not found`);
+      }
       return {
         ...post,
         created: DateTime.fromISO(post.created),
@@ -35,14 +39,12 @@ const selectPeriod = (period: Period): void => {
 };
 </script>
 <template>
-  {{ postsStore.getState().foo }}
-  <button @click="postsStore.updateFoo('bar')">Update</button>
   <nav class="is-primary panel">
     <span class="panel-tabs">
       <a
         v-for="period of periods"
         :key="period"
-        :class="`period`"
+        :class="{ 'is-active': period === selectedPeriod }"
         @click="selectPeriod(period)"
       >
         {{ period }}

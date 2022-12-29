@@ -1,27 +1,41 @@
-import { reactive, readonly } from "vue";
+import { defineStore } from "pinia";
+import { type Post, today, thisWeek, thisMonth } from "@/posts";
 
 interface PostsState {
-  foo: string;
+  ids: string[];
+  all: Map<string, Post>;
 }
 
-export class PostsStore {
-  #state: PostsState;
+export const usePosts = defineStore("posts", {
+  state: (): PostsState => ({
+    ids: [today.id, thisWeek.id, thisMonth.id],
+    all: new Map([
+      [today.id, today],
+      [thisWeek.id, thisWeek],
+      [thisMonth.id, thisMonth],
+    ]),
+  }),
+});
 
-  constructor() {
-    this.#state = reactive<PostsState>({ foo: "foo" });
-  }
+// import { reactive, readonly } from "vue";
+// export class PostsStore {
+//   #state: PostsState;
 
-  getState(): PostsState {
-    return readonly(this.#state);
-  }
+//   constructor() {
+//     this.#state = reactive<PostsState>({ foo: "foo" });
+//   }
 
-  updateFoo(foo: string) {
-    this.#state.foo = foo;
-  }
-}
+//   getState(): PostsState {
+//     return readonly(this.#state);
+//   }
 
-const store = new PostsStore();
+//   updateFoo(foo: string) {
+//     this.#state.foo = foo;
+//   }
+// }
 
-export function usePosts() {
-  return store;
-}
+// const store = new PostsStore();
+
+// export function usePosts() {
+//   return store;
+// }

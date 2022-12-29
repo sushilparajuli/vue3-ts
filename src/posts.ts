@@ -17,13 +17,13 @@ export const today: Post = {
 };
 
 export const thisWeek: Post = {
-  id: "1",
+  id: "2",
   title: "This Week",
   created: DateTime.now().minus({ day: 5 }).toISO(),
 };
 
 export const thisMonth: Post = {
-  id: "1",
+  id: "3",
   title: "This Month",
   created: DateTime.now().minus({ weeks: 3 }).toISO(),
 };
