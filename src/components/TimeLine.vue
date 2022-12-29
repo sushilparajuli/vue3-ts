@@ -2,7 +2,10 @@
 import { DateTime } from "luxon/src/luxon";
 import { ref, computed } from "vue";
 import { type TimelinePost, today, thisMonth, thisWeek } from "../posts";
-import TimeLineItem from "./TimeLineItem.vue";
+import TimeLineItem from "@/components/TimeLineItem.vue";
+import { usePosts } from "@/stores/posts";
+
+const postsStore = usePosts();
 
 const periods = ["Today", "This Week", "This Month"] as const;
 type Period = typeof periods[number];
@@ -32,6 +35,8 @@ const selectPeriod = (period: Period): void => {
 };
 </script>
 <template>
+  {{ postsStore.getState().foo }}
+  <button @click="postsStore.updateFoo('bar')">Update</button>
   <nav class="is-primary panel">
     <span class="panel-tabs">
       <a
