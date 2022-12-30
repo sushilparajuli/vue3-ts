@@ -3,7 +3,9 @@ import TimeLineItem from "@/components/TimeLineItem.vue"
 import { usePosts } from "@/stores/posts"
 import { periods } from "@/types/constants.type"
 
+// store setup and fetch posts
 const postsStore = usePosts()
+await postsStore.fetchPosts()
 </script>
 <template>
   <nav class="is-primary panel">

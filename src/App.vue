@@ -6,7 +6,14 @@ import TimeLine from "@/components/TimeLine.vue"
   <div class="section"></div>
 
   <div class="container">
-    <TimeLine />
+    <Suspense>
+      <template #default>
+        <TimeLine />
+      </template>
+      <template #fallback>
+        <progress class="progress is-primary is-small" />
+      </template>
+    </Suspense>
   </div>
 </template>
 
