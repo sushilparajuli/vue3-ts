@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { TimelinePost } from "@/posts";
+import type { TimelinePost } from "@/posts"
 defineProps<{
-  post: TimelinePost;
-}>();
+  post: TimelinePost
+}>()
 </script>
 <template>
   <a :class="`panel-block is-flex is-flex-direction-column`">
