@@ -1,12 +1,19 @@
 <script setup lang="ts">
-import TimeLine from "./components/TimeLine.vue";
+import TimeLine from "@/components/TimeLine.vue"
 </script>
 
 <template>
   <div class="section"></div>
 
   <div class="container">
-    <TimeLine />
+    <Suspense>
+      <template #default>
+        <TimeLine />
+      </template>
+      <template #fallback>
+        <progress class="progress is-primary is-small" />
+      </template>
+    </Suspense>
   </div>
 </template>
 
