@@ -3,6 +3,7 @@
 import { ref, onMounted, watch, watchEffect } from "vue";
 import type { TimelinePost } from "@/posts";
 import { marked } from "marked";
+import hljs from "highlight.js";
 
 // Props and reactive variables
 const props = defineProps<{
@@ -22,9 +23,19 @@ const html = ref("");
 watch(
   content,
   (newContent) => {
-    marked.parse(newContent, (err, parseResult) => {
-      html.value = parseResult;
-    });
+    marked.parse(
+      newContent,
+      {
+        gfm: true,
+        breaks: true,
+        highlight: (code) => {
+          return hljs.highlightAuto(code).value;
+        },
+      },
+      (err, parseResult) => {
+        html.value = parseResult;
+      }
+    );
   },
   { immediate: true }
 );
