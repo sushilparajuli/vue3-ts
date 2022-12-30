@@ -1,19 +1,10 @@
-<script setup lang="ts">
-import TimeLine from "@/components/TimeLine.vue"
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div class="section"></div>
-
-  <div class="container">
-    <Suspense>
-      <template #default>
-        <TimeLine />
-      </template>
-      <template #fallback>
-        <progress class="progress is-primary is-small" />
-      </template>
-    </Suspense>
+  <div class="section">
+    <div class="container">
+      <RouterView />
+    </div>
   </div>
 </template>
 
