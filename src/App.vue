@@ -1,11 +1,8 @@
 <script setup lang="ts">
 import Navbar from "@/components/Navbar.vue";
 import { useModal } from "@/composables/modal";
-import { ref, computed } from "vue";
-import FormInput from "./components/FormInput.vue";
+import { computed } from "vue";
 const modal = useModal();
-
-const username = ref("hello");
 
 const modalStyle = computed(() => {
   return {
@@ -24,10 +21,8 @@ const modalStyle = computed(() => {
   </div>
   <div class="section">
     <div class="container">
-      <FormInput name="Username" v-model="username" />
       <Navbar />
       <RouterView />
-      {{ username }}
     </div>
   </div>
 </template>
