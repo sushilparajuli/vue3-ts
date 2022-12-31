@@ -17,7 +17,6 @@ export const useUsers = defineStore("users", {
           },
         });
         const user = await res.json();
-        console.log(user);
         this.currentUserId = user.id;
       } catch (err) {
         this.currentUserId = undefined;

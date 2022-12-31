@@ -41,7 +41,7 @@ const handleSubmit = async () => {
     console.error(error);
   }
 
-  if (formField.value && !props.errorMessage) {
+  if (formField.value && props.errorMessage === "undefined") {
     formField.value.reset();
   }
 };
@@ -60,7 +60,9 @@ const handleSubmit = async () => {
       v-model="password"
       :status="passwordStatus"
     />
-    <div v-if="errorMessage" class="is-danger help">{{ errorMessage }}</div>
+    <div v-if="errorMessage" class="is-danger help my-4">
+      {{ errorMessage }}
+    </div>
     <div class="control">
       <button :disabled="isInvalid" class="button is-primary">Submit</button>
     </div>

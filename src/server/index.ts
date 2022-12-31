@@ -58,6 +58,18 @@ app.post<{}, {}, NewUser>("/users", (req, res) => {
   res.json(rest);
 });
 
+app.post<{}, {}, NewUser>("/login", (req, res) => {
+  const targetUser = allUsers.find(
+    (user) => user.username === req.body.username
+  );
+  if (!targetUser || targetUser.password !== req.body.password) {
+    res.status(401).end();
+  } else {
+    authenticate(targetUser.id, req, res);
+    res.status(200).end();
+  }
+});
+
 app.post("/logout", (req, res) => {
   //set a empty cookie
   res.cookie(COOKIE, "", { httpOnly: true });
