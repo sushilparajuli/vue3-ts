@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { DateTime } from "luxon/src/luxon";
-import type { Post, TimelinePost } from "@/posts";
+import type { Post, TimelinePost } from "@/types/posts";
 import type { Period } from "@/types/constants.type";
 
 interface PostsState {
@@ -24,7 +24,7 @@ export const usePosts = defineStore("posts", {
       this.selectedPeriod = period;
     },
     async fetchPosts() {
-      const res = await fetch("http://localhost:8001/posts");
+      const res = await fetch("/api/posts");
       const data = (await res.json()) as Post[];
       await delay();
 
@@ -38,10 +38,20 @@ export const usePosts = defineStore("posts", {
       this.ids = ids;
       this.all = all;
     },
-    createPost(post: TimelinePost) {
-      const body = JSON.stringify({ ...post, created: post.created.toISO() });
-      return fetch("http://localhost:8001/posts", {
+    createPost(post: Post) {
+      const body = JSON.stringify(post);
+      return fetch("/api/posts", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body,
+      });
+    },
+    editPost(post: Post) {
+      const body = JSON.stringify(post);
+      return fetch("/api/posts", {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -74,26 +84,3 @@ export const usePosts = defineStore("posts", {
     },
   },
 });
-
-// import { reactive, readonly } from "vue";
-// export class PostsStore {
-//   #state: PostsState;
-
-//   constructor() {
-//     this.#state = reactive<PostsState>({ foo: "foo" });
-//   }
-
-//   getState(): PostsState {
-//     return readonly(this.#state);
-//   }
-
-//   updateFoo(foo: string) {
-//     this.#state.foo = foo;
-//   }
-// }
-
-// const store = new PostsStore();
-
-// export function usePosts() {
-//   return store;
-// }

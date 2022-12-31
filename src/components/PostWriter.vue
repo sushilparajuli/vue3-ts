@@ -1,16 +1,17 @@
 <script lang="ts" setup>
 // import
 import { ref, onMounted, watch } from "vue";
-import type { TimelinePost } from "@/posts";
+import type { Post, TimelinePost } from "@/types/posts";
 import { marked } from "marked";
 import hljs from "highlight.js";
 import { useRouter } from "vue-router";
 import debounce from "lodash/debounce";
 import { usePosts } from "@/stores/posts";
+import { useUsers } from "@/stores/users";
 
 // Props and reactive variables
 const props = defineProps<{
-  post: TimelinePost;
+  post: TimelinePost | Post;
 }>();
 const title = ref(props.post.title);
 const content = ref(props.post.markdown);
@@ -18,6 +19,11 @@ const contentEditable = ref<HTMLDivElement>();
 const html = ref("");
 const postStore = usePosts();
 const router = useRouter();
+const usersStore = useUsers();
+
+const emit = defineEmits<{
+  (event: "submit", payload: Post): void;
+}>();
 
 // watchEffect(() => {
 //   marked.parse(content.value, (err, parseResult) => {
@@ -34,14 +40,26 @@ const handleInput = () => {
 };
 
 const handleSave = async () => {
-  const newPost: TimelinePost = {
+  if (!usersStore.currentUserId) {
+    throw Error("Users was not found");
+  }
+  const newPost: Post = {
     ...props.post,
+    created:
+      typeof props.post.created === "string"
+        ? props.post.created
+        : props.post.created.toISO(),
     title: title.value,
     markdown: content.value,
     html: html.value,
+    authorId: usersStore.currentUserId,
   };
-  await postStore.createPost(newPost);
-  router.push("/");
+
+  try {
+    emit("submit", newPost);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const parsHtml = (markdown: string) => {

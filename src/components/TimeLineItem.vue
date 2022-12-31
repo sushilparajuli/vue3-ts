@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import type { TimelinePost } from "@/posts";
+import type { TimelinePost } from "@/types/posts";
 defineProps<{
   post: TimelinePost;
 }>();
 </script>
 <template>
-  <a :class="`panel-block is-flex is-flex-direction-column`">
+  <RouterLink
+    :to="`posts/${post.id}`"
+    :class="`panel-block is-flex is-flex-direction-column`"
+  >
     <a> {{ post.title }} </a>
     <div>{{ post.created.toFormat("d MMM") }}</div>
-  </a>
+  </RouterLink>
 </template>
