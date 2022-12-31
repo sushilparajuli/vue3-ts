@@ -29,5 +29,5 @@ app.post<{}, {}, NewUser>("/users", (req, res) => {
 });
 
 app.listen(8001, () => {
-  console.log("Listening on 80001");
+  console.log("Listening on 8001");
 });
