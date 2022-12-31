@@ -48,6 +48,16 @@ export const usePosts = defineStore("posts", {
         body,
       });
     },
+    editPost(post: Post) {
+      const body = JSON.stringify(post);
+      return fetch("/api/posts", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body,
+      });
+    },
   },
   getters: {
     filterPosts: (state): TimelinePost[] => {

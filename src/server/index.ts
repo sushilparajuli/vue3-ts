@@ -50,6 +50,17 @@ app.post<{}, {}, Post>("/posts", (req, res) => {
   res.json(post);
 });
 
+app.put<{}, {}, Post>("/posts", (req, res) => {
+  const index = allPosts.findIndex((post) => post.id === req.body.id);
+  if (index === -1) {
+    throw Error("No post found with id " + req.body.id);
+  } else {
+    const existingPost = allPosts[index];
+    allPosts[index] = { ...existingPost, ...req.body };
+    res.json(allPosts[index]);
+  }
+});
+
 app.post<{}, {}, NewUser>("/users", (req, res) => {
   const newUser = { ...req.body, id: nanoid(10) };
   allUsers.push(newUser);

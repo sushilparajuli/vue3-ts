@@ -21,6 +21,10 @@ const postStore = usePosts();
 const router = useRouter();
 const usersStore = useUsers();
 
+const emit = defineEmits<{
+  (event: "submit", payload: Post): void;
+}>();
+
 // watchEffect(() => {
 //   marked.parse(content.value, (err, parseResult) => {
 //     html.value = parseResult;
@@ -50,8 +54,12 @@ const handleSave = async () => {
     html: html.value,
     authorId: usersStore.currentUserId,
   };
-  await postStore.createPost(newPost);
-  router.push("/");
+
+  try {
+    emit("submit", newPost);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const parsHtml = (markdown: string) => {
