@@ -9,6 +9,16 @@ const modalStyle = computed(() => {
     display: modal.show.value ? "block" : "none",
   };
 });
+
+async function authenticate() {
+  const res = await fetch("/api/verify-token", {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  console.log(await res.json());
+}
+authenticate();
 </script>
 <template>
   <div class="modal" style="color: white" :style="modalStyle">
