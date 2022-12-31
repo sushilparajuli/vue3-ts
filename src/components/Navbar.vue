@@ -1,19 +1,22 @@
 <script setup lang="ts">
 import { useModal } from "@/composables/modal";
 import { useUsers } from "@/stores/users";
+import { useRouter } from "vue-router";
 const modal = useModal();
 const usersStore = useUsers();
+const router = useRouter();
+
+async function logOut() {
+  await usersStore.logout();
+  router.push({ path: "/" });
+}
 </script>
 <template>
   <nav class="navbar mb-6">
     <div class="navbar-end">
       <div v-if="usersStore.currentUserId" class="buttons">
         <RouterLink to="/posts/new" class="button is-info">New Post</RouterLink>
-        <button
-          type="button"
-          @click="usersStore.logout()"
-          class="button is-danger"
-        >
+        <button type="button" @click="logOut()" class="button is-danger">
           Log Out
         </button>
       </div>
