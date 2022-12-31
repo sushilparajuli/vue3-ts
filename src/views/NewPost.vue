@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import PostWriter from "@/components/PostWriter.vue";
-import type { TimelinePost } from "@/posts";
+import type { TimelinePost } from "@/types/posts";
 import { DateTime } from "luxon";
 const post: TimelinePost = {
   id: "-1",

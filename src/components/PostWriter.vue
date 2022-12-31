@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 // import
 import { ref, onMounted, watch } from "vue";
-import type { TimelinePost } from "@/posts";
+import type { TimelinePost } from "@/types/posts";
 import { marked } from "marked";
 import hljs from "highlight.js";
 import { useRouter } from "vue-router";

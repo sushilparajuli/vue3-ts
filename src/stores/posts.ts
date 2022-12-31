@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { DateTime } from "luxon/src/luxon";
-import type { Post, TimelinePost } from "@/posts";
+import type { Post, TimelinePost } from "@/types/posts";
 import type { Period } from "@/types/constants.type";
 
 interface PostsState {
