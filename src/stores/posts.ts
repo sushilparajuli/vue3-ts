@@ -38,8 +38,8 @@ export const usePosts = defineStore("posts", {
       this.ids = ids;
       this.all = all;
     },
-    createPost(post: TimelinePost) {
-      const body = JSON.stringify({ ...post, created: post.created.toISO() });
+    createPost(post: Post) {
+      const body = JSON.stringify(post);
       return fetch("/api/posts", {
         method: "POST",
         headers: {
@@ -74,26 +74,3 @@ export const usePosts = defineStore("posts", {
     },
   },
 });
-
-// import { reactive, readonly } from "vue";
-// export class PostsStore {
-//   #state: PostsState;
-
-//   constructor() {
-//     this.#state = reactive<PostsState>({ foo: "foo" });
-//   }
-
-//   getState(): PostsState {
-//     return readonly(this.#state);
-//   }
-
-//   updateFoo(foo: string) {
-//     this.#state.foo = foo;
-//   }
-// }
-
-// const store = new PostsStore();
-
-// export function usePosts() {
-//   return store;
-// }
