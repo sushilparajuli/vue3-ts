@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Navbar from "@/components/Navbar.vue";
+import NavBar from "@/components/NavBar.vue";
 import { useModal } from "@/composables/modal";
 import { useUsers } from "@/stores/users";
 import { computed } from "vue";
@@ -21,11 +21,11 @@ usersStore.authenticate();
         <div id="modal"></div>
       </div>
     </div>
-    <button @click="modal.hidedModal()" class="modal-close is-large"></button>
+    <button @click="modal.hideModal()" class="modal-close is-large"></button>
   </div>
   <div class="section">
     <div class="container">
-      <Navbar />
+      <NavBar />
       <RouterView />
     </div>
   </div>

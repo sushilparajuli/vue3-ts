@@ -1,4 +1,4 @@
-import type { NewUser } from "@/types/users";
+import type { NewUser, User } from "@/types/users";
 import { defineStore } from "pinia";
 
 interface UserState {
@@ -42,6 +42,17 @@ export const useUsers = defineStore("users", {
         body,
       });
       return this.authenticate();
+    },
+    async login(user: NewUser) {
+      const body = JSON.stringify(user);
+      return await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body,
+      });
+      // return this.authenticate();
     },
   },
 });
