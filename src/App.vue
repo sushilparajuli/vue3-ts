@@ -1,18 +1,15 @@
 <script setup lang="ts">
 import NavBar from "@/components/NavBar.vue";
 import { useModal } from "@/composables/modal";
-import { useUsers } from "@/stores/users";
 import { computed } from "vue";
 const modal = useModal();
-const usersStore = useUsers();
+
 
 const modalStyle = computed(() => {
   return {
     display: modal.show.value ? "block" : "none",
   };
 });
-
-usersStore.authenticate();
 </script>
 <template>
   <div class="modal" style="color: white" :style="modalStyle">
