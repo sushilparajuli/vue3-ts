@@ -8,7 +8,7 @@ import TimeLine from "@/components/TimeLine.vue";
       <TimeLine />
     </template>
     <template #fallback>
-      <progress class="progress is-primary is-small" />
+      <progress class="progress is-primary is-small mt-5" />
     </template>
   </Suspense>
 </template>

@@ -58,6 +58,12 @@ app.post<{}, {}, NewUser>("/users", (req, res) => {
   res.json(rest);
 });
 
+app.post("/logout", (req, res) => {
+  //set a empty cookie
+  res.cookie(COOKIE, "", { httpOnly: true });
+  res.status(200).end();
+});
+
 app.listen(8001, () => {
   // allUsers.splice(0, allUsers.length);
   console.log("Listening on 8001");

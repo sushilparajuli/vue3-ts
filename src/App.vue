@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import Navbar from "@/components/Navbar.vue";
 import { useModal } from "@/composables/modal";
+import { useUsers } from "@/stores/users";
 import { computed } from "vue";
 const modal = useModal();
+const usersStore = useUsers();
 
 const modalStyle = computed(() => {
   return {
@@ -10,15 +12,7 @@ const modalStyle = computed(() => {
   };
 });
 
-async function authenticate() {
-  const res = await fetch("/api/verify-token", {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  console.log(await res.json());
-}
-authenticate();
+usersStore.authenticate();
 </script>
 <template>
   <div class="modal" style="color: white" :style="modalStyle">
