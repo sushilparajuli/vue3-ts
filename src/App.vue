@@ -4,7 +4,6 @@ import { useModal } from "@/composables/modal";
 import { computed } from "vue";
 const modal = useModal();
 
-
 const modalStyle = computed(() => {
   return {
     display: modal.show.value ? "block" : "none",
