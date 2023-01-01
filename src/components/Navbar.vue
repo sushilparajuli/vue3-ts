@@ -16,7 +16,12 @@ async function logOut() {
     <div class="navbar-end">
       <div v-if="usersStore.currentUserId" class="buttons">
         <RouterLink to="/posts/new" class="button is-info">New Post</RouterLink>
-        <button type="button" @click="logOut()" class="button is-danger">
+        <button
+          data-test="logout"
+          type="button"
+          @click="logOut()"
+          class="button is-danger"
+        >
           Log Out
         </button>
       </div>
