@@ -4,9 +4,7 @@ import { ref, onMounted, watch } from "vue";
 import type { Post, TimelinePost } from "@/types/posts";
 import { marked } from "marked";
 import hljs from "highlight.js";
-import { useRouter } from "vue-router";
 import debounce from "lodash/debounce";
-import { usePosts } from "@/stores/posts";
 import { useUsers } from "@/stores/users";
 
 // Props and reactive variables
@@ -17,8 +15,6 @@ const title = ref(props.post.title);
 const content = ref(props.post.markdown);
 const contentEditable = ref<HTMLDivElement>();
 const html = ref("");
-const postStore = usePosts();
-const router = useRouter();
 const usersStore = useUsers();
 
 const emit = defineEmits<{
@@ -106,7 +102,12 @@ onMounted(() => {
   </div>
   <div class="columns">
     <div class="column">
-      <div ref="contentEditable" contenteditable @input="handleInput" />
+      <div
+        data-test-id="content-editable"
+        ref="contentEditable"
+        contenteditable
+        @input="handleInput"
+      />
     </div>
     <div class="column">
       <div v-html="html" />
@@ -114,7 +115,11 @@ onMounted(() => {
   </div>
   <div class="columns">
     <div class="column">
-      <button class="button is-primary is-pulled-right" @click="handleSave">
+      <button
+        data-test-id="submit"
+        class="button is-primary is-pulled-right"
+        @click="handleSave"
+      >
         Save Post
       </button>
     </div>
