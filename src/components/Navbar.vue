@@ -21,10 +21,19 @@ async function logOut() {
         </button>
       </div>
       <div v-else class="buttons">
-        <button type="button" @click="modal.showModal('signUp')" class="button">
+        <button
+          data-test="sign-up"
+          type="button"
+          @click="modal.showModal('signUp')"
+          class="button"
+        >
           Sign Up
         </button>
-        <button @click="modal.showModal('signIn')" class="button">
+        <button
+          data-test="sign-in"
+          @click="modal.showModal('signIn')"
+          class="button"
+        >
           Sign In
         </button>
       </div>
