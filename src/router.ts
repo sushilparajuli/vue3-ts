@@ -7,7 +7,7 @@ import { useUsers } from "@/stores/users";
 
 // 2. Define some routes
 // Each route should map to a component.
-const routes = [
+export const routes = [
   {
     path: "/",
     component: Home,
