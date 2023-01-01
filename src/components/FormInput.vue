@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Status } from '@/validations';
+import type { Status } from "@/validations";
 
 defineProps<{
   name: string;
@@ -16,7 +16,6 @@ const handleInput = (e: Event) => {
   const value = (e.target as HTMLInputElement).value;
   emit("update:modelValue", value);
 };
-
 </script>
 <template>
   <div class="field">
